@@ -289,6 +289,17 @@ static OBSEncoderAutoRelease create_video_encoder(DStr &name_buffer, size_t enco
 	}
 	obs_data_set_bool(encoder_settings, "disable_scenecut", true);
 
+	long bitrate = obs_data_get_int(encoder_settings, "bitrate");
+	if (bitrate == 7500 && encoder_config.height == 1440) {
+		obs_data_set_int(encoder_settings, "bitrate", 8500L);
+	}
+
+	if (bitrate == 6000 && encoder_config.height == 1080) {
+		obs_data_set_int(encoder_settings, "bitrate", 8000L);
+	}
+
+	obs_data_set_bool(encoder_settings, "disable_scenecut", true);
+
 	OBSEncoderAutoRelease video_encoder =
 		obs_video_encoder_create(encoder_type, name_buffer, encoder_settings, nullptr);
 	if (!video_encoder) {
@@ -669,6 +680,7 @@ static bool create_video_encoders(const GoLiveApi::Config &go_live_config,
 
 	for (size_t i = 0; i < go_live_config.encoder_configurations.size(); i++) {
 		auto &config = go_live_config.encoder_configurations[i];
+		config.settings.get()
 		if (config.canvas_index > max_canvas_idx) {
 			blog(LOG_ERROR, "MultitrackVideoOutput: Invalid canvas index: %u", config.canvas_index);
 			throw MultitrackVideoError::warning(QTStr("FailedToStartStream.InvalidEncoderConfig"));
