@@ -680,7 +680,6 @@ static bool create_video_encoders(const GoLiveApi::Config &go_live_config,
 
 	for (size_t i = 0; i < go_live_config.encoder_configurations.size(); i++) {
 		auto &config = go_live_config.encoder_configurations[i];
-		config.settings.get()
 		if (config.canvas_index > max_canvas_idx) {
 			blog(LOG_ERROR, "MultitrackVideoOutput: Invalid canvas index: %u", config.canvas_index);
 			throw MultitrackVideoError::warning(QTStr("FailedToStartStream.InvalidEncoderConfig"));

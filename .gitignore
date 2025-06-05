@@ -32,6 +32,7 @@
 !INSTALL
 !README.rst
 
+deps/*
 # Exclude lock files
 *.lock.json
 
