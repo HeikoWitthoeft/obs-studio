@@ -291,11 +291,11 @@ static OBSEncoderAutoRelease create_video_encoder(DStr &name_buffer, size_t enco
 
 	long bitrate = obs_data_get_int(encoder_settings, "bitrate");
 	if (bitrate == 7500 && encoder_config.height == 1440) {
-		obs_data_set_int(encoder_settings, "bitrate", 8500L);
+		obs_data_set_int(encoder_settings, "bitrate", 8000L);
 	}
 
 	if (bitrate == 6000 && encoder_config.height == 1080) {
-		obs_data_set_int(encoder_settings, "bitrate", 8000L);
+		obs_data_set_int(encoder_settings, "bitrate", 7000L);
 	}
 
 	obs_data_set_bool(encoder_settings, "disable_scenecut", true);
