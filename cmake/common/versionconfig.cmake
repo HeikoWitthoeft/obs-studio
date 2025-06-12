@@ -3,7 +3,7 @@
 include_guard(GLOBAL)
 
 if(NOT DEFINED _obs_default_version)
-  set(_obs_default_version "30;0;1")
+  set(_obs_default_version "31;0;3")
 endif()
 
 set(_obs_version ${_obs_default_version})
@@ -50,16 +50,16 @@ elseif(_obs_version MATCHES "[0-9]+\\.[0-9]+\\.[0-9]+-beta[0-9]+")
 endif()
 
 if(NOT _obs_version_canonical)
-  message(WARNING "OBS version could not be detected, using fallback version 30.0.1")
-  set(_obs_version_canonical "30;0;1")
-  set(_obs_version "30.0.1")
+  message(WARNING "OBS version could not be detected, using fallback version 31;0;3")
+  set(_obs_version_canonical "31;0;3")
+  set(_obs_version "31.0.3")
 endif()
 
 list(LENGTH _obs_version_canonical _version_list_length)
 if(_version_list_length LESS 3)
-  message(WARNING "OBS version list too short or empty, using fallback version 30.0.1")
-  set(_obs_version_canonical "30;0;1")
-  set(_obs_version "30.0.1")
+  message(WARNING "OBS version list too short or empty, using fallback version 31;0;3")
+  set(_obs_version_canonical "31;0;3")
+  set(_obs_version "31.0.3")
 endif()
 
 list(GET _obs_version_canonical 0 OBS_VERSION_MAJOR)
