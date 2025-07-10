@@ -295,6 +295,9 @@ static OBSEncoderAutoRelease create_video_encoder(DStr &name_buffer, size_t enco
 	}
 
 	if (bitrate == 6000 && encoder_config.height == 1080) {
+		obs_data_set_int(encoder_settings, "height", 936L);
+		obs_data_set_int(encoder_settings, "width", 1664L);
+
 		obs_data_set_int(encoder_settings, "bitrate", 7000L);
 	}
 
