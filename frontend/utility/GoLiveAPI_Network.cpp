@@ -97,6 +97,7 @@ GoLiveApi::Config DownloadGoLiveConfig(QWidget *parent, QString url, const GoLiv
 		blog(LOG_INFO, "Go live response data: %s", censoredJson(data, true).toUtf8().constData());
 		GoLiveApi::Config config = data;
 		HandleGoLiveApiErrors(parent, data, config);
+		
 		return config;
 
 	} catch (const json::exception &e) {

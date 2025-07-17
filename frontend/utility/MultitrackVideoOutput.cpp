@@ -289,20 +289,6 @@ static OBSEncoderAutoRelease create_video_encoder(DStr &name_buffer, size_t enco
 	}
 	obs_data_set_bool(encoder_settings, "disable_scenecut", true);
 
-	long bitrate = obs_data_get_int(encoder_settings, "bitrate");
-	if (bitrate == 7500 && encoder_config.height == 1440) {
-		obs_data_set_int(encoder_settings, "bitrate", 8000L);
-	}
-
-	if (bitrate == 6000 && encoder_config.height == 1080) {
-		obs_data_set_int(encoder_settings, "height", 936L);
-		obs_data_set_int(encoder_settings, "width", 1664L);
-
-		obs_data_set_int(encoder_settings, "bitrate", 7000L);
-	}
-
-	obs_data_set_bool(encoder_settings, "disable_scenecut", true);
-
 	OBSEncoderAutoRelease video_encoder =
 		obs_video_encoder_create(encoder_type, name_buffer, encoder_settings, nullptr);
 	if (!video_encoder) {
@@ -467,7 +453,7 @@ void MultitrackVideoOutput::PrepareStreaming(
 	}
 
 	const auto &output_config = custom ? *custom : *go_live_config;
-	const auto &service_config = go_live_config ? *go_live_config : *custom;
+	const auto &service_config = *go_live_config; // just takeover for output not for go live to keep the rest in OBS UI 
 
 	std::vector<OBSEncoderAutoRelease> audio_encoders;
 	std::shared_ptr<obs_encoder_group_t> video_encoder_group;
